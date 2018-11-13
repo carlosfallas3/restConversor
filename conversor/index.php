@@ -41,19 +41,24 @@
 	function convertir(){
 		 var getUrl = window.location;
 		 var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1]+"/";
-		 $.ajax({
-		    url: baseUrl+'restService/restService.php', //hubicación del servicio rest
-		    type: "POST",
-		    data: { de : $("#deId").val(), a: $("#aId").val(), convertir: $("[name=convertir]").val() },
-		    dataType:'json',
+		 if($("[name=convertir]").val()!=""){
 
-		    success: function (response) {
-		       $("#resultado").html("Resultado: <p>"+response.result+"</p>");
-		    },
-		    error: function(error){
-		         $("#resultado").html("Response:<p Style='color:red'>"+error.responseText+"</p>");
-		    } 
-		});
+			 $.ajax({
+			    url: baseUrl+'restService/restService.php', //hubicación del servicio rest
+			    type: "POST",
+			    data: { de : $("#deId").val(), a: $("#aId").val(), convertir: $("[name=convertir]").val() },
+			    dataType:'json',
+
+			    success: function (response) {
+			       $("#resultado").html("Resultado: <p>"+response.result+"</p>");
+			    },
+			    error: function(error){
+			         $("#resultado").html("Response:<p Style='color:red'>"+error.responseText+"</p>");
+			    } 
+			});
+		}else{
+			alert("Debe ingresar un valor a convertir!, gracias");
+		}
 	}
 </script>
 </body>
